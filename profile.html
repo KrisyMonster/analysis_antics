@@ -1,0 +1,28 @@
+<?php include_once 'sessionhandler.php' ?>
+<?php include_once 'index.php' ?>
+<?php session_start();?>
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head/>
+<style>
+h1 {text-align: center;}
+h4 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+form {text-align: center;}
+</style>
+</head>
+<body>
+		<a href="index.php">Home</a>
+		<a href="registration.html">Register</a>
+		<a href="logout.html">Logout</a>		
+<h1>Welcome</h1>
+<p>Student Profile </p>
+<div>
+<b>Name: <?php echo ['$fName']?></b><br/>
+<b>E-mail: <?php echo['$email'];?></b><br/>
+<b>Schedule: <?php echo['$schedule'];?></b><br/>
+</div>
+</body
+</html> 
