@@ -11,7 +11,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $con = mysqli_connect($serverName, $user, $pass, $databaseName);
 
-$sql = mysqli_query($con, "SELECT * FROM student_registration WHERE email='email' AND password='password'");
+$sql = mysqli_query($con, "SELECT * FROM student_registration WHERE email='$_POST[email]' AND password='$_POST[password]'");
 
 if (mysqli_num_rows($sql) > 0) {
     $row = mysqli_fetch_array($sql);
