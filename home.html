@@ -1,0 +1,33 @@
+<?php
+//home
+require_once dbQuaries.php
+
+createTable= mysqli_query($con, $tableQuery);
+?> 
+
+<!Doctype html>
+<html>
+<head>
+	<title>University Home Page</title>
+<style>
+h1 {text-align: center;}
+h4 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+form {text-align: center;}
+href {text-align: left;}
+body {text-align: center;}
+
+</style>
+
+</head>
+	</head>
+	<body>
+		<br>
+		<h1>University home</h1>
+		<br>
+		<p>Please Register or Login</p>
+		<a href="registration.html">Register</a>
+		<a href="login_page.html">Login</a>
+	</body>
+</html>

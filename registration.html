@@ -1,0 +1,38 @@
+
+<?php require_once 'registration.php'?>
+<?php session_start();?>
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head/>
+	<style>
+	h1 {text-align: center;}
+	h4 {text-align: center;}
+	p {text-align: center;}
+	div {text-align: center;}
+	form {text-align: center;}
+	href {text-align: center;}
+	</style>
+
+	</head>
+	<body>
+			<a href="home.html">Home</a>
+			<a href="login_page.html">Login</a>
+	<h1>Registration</h1>
+	<p>Please enter your information to register</p>
+			<form method="POST" action="registration.php">
+				First Name:<input type="text" name="firstName" placeholder = "First name"/><br />
+				Last Name:<input type="text" name="lastName" placeholder = "Lastname"/><br />
+				Address:<input type="Address" name="address" placeholder ="1234 ST, City, ST, 00000"/><br /> 
+				Phone:<input type="int" name="phone" placeholder ="12134567890"/><br />
+				Email:<input type="email" name="email" placeholder = "exampleemail@abc.com"/><br />
+				Password:<input type ="text" name="password" placeholder = "8-32 characters"/><br />
+				<td><input name="submitBtn"
+				type="Submit" id="submitBtn"
+				value="Submit"></td>
+				<br/>
+			</form>
+	</body>
+</html>
+			
+			
