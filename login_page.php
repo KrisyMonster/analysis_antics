@@ -1,26 +1,28 @@
-<?php 
-session_start();?>
-<?php 
+<?php session_start();?>
+<?php include_once 'dbQueries.php'; ?>
 
-$serverName = "localhost";
-$user = "root";
-$pass = "";
-$databaseName = "cst499_OnlineRegistration";
+<?php
 
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+$email = $_POST['email'];
+$password = $_POST['password'];
 
-$con = mysqli_connect($serverName, $user, $pass, $databaseName);
-
-$sql = mysqli_query($con, "SELECT * FROM student_registration WHERE email='$_POST[email]' AND password='$_POST[password]'");
-
-if (mysqli_num_rows($sql) > 0) {
-    $row = mysqli_fetch_array($sql);
-    header("Location: profile.html");
-    exit();
+$stmt = $con->prepare("SELECT * FROM student_registration WHERE email = ? AND password = ?");
+$stmt->bind_param("ss", $email, $password);
+$stmt->execute();
+$result = $stmt->get_result();
+if (!$result) {
+	die ("Error logging in, please try again");
 } else {
-    header("Location: login_page.html");
-	//echo "Invalid login credentials, please try again";
-    exit();
+	
+if ($result->num_rows > 0) {
+	while ($row = $result->fetch_assoc()) {
+		$_SESSION['studentID'] = $row['studentID'];
+		$_SESSION['fName'] = $row['fName'];
+		$_SESSION['lName'] = $row['lName'];
+		$_SESSION['email'] = $row['email'];
+	}
+	header("Location: profile.php");
+	exit();
+}
 }
 ?>
-
