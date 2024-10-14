@@ -23,6 +23,7 @@
 	<h1>Course Registration</h1>
 	<p>Please select the courses you would like to register for</p>
 	<div>
+	<form method="post" action="courseRegistrtion.php">
         <?php 
         $sql = $con->prepare("SELECT * FROM offered_courses");
         $sql->execute();
@@ -30,10 +31,13 @@
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                echo $row['courseTitle'] . "<br/>";
-            }
+                //echo $row['courseTitle'] . "<br/>";
+				echo '<input type="checkbox" name="checkboxes[]" value ="' .$row["courseID"] . '">' .$row["courseTitle"] . '<br>';
+			} 
         } 
         ?>
+		<input type="submit" value="enroll">
+		</form>
     </div>
 </body>
 </html>
