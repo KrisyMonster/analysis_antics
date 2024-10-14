@@ -45,6 +45,9 @@ form {text-align: center;}
     <form method="POST" action="courseRegistration.html">
         <input name="submitBtn" type="submit" id="registerCourseBtn" value="Register Courses">
     </form>
+ <form method="POST" action="manageCourse.php">
+        <input name="submitBtn" type="submit" id="manageCourseBtn" value="Manage Enrollments">
+    </form>			
 </body>
 </html>
 
