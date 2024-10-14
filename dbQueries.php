@@ -28,7 +28,7 @@ $tableQuery = mysqli_query($con,
 if (!$tableQuery) {
     echo "Error creating Student Registration table: " . mysqli_error($con);
 } else {
-    echo "Student registration table created successfully!\n";
+//    echo "Student registration table created successfully!\n";
 }
 $courseTable = mysqli_query($con,
 "CREATE TABLE IF NOT EXISTS offered_courses (
@@ -40,7 +40,7 @@ $courseTable = mysqli_query($con,
 if (!$courseTable) {
     echo "Error creating Offered Courses table: " . mysqli_error($con);
 } else {
-    echo "Offered courses table created successfully!\n";
+//    echo "Offered courses table created successfully!\n";
 }
 $enrolledTable = mysqli_query($con, 
 "CREATE TABLE IF NOT EXISTS enrolled_courses (
@@ -54,6 +54,21 @@ $enrolledTable = mysqli_query($con,
 if (!$enrolledTable) {
     echo "Error creating Enrolled Courses table: " . mysqli_error($con);
 } else {
-    echo "Enrolled Courses able created successfully!";
+//    echo "Enrolled Courses table created successfully!";
+}
+
+$waitlistTable = mysqli_query($con, 
+"CREATE TABLE IF NOT EXISTS wait_list (
+	waitID INT (255) UNIQUE NOT NULL AUTO_INCREMENT,
+	studentID INT,
+	courseID INT,
+	PRIMARY KEY (waitID),
+	FOREIGN KEY (studentID) REFERENCES student_registration(studentID),
+	FOREIGN KEY (courseID) REFERENCES offered_courses(courseID))");
+	
+if (!$waitlistTable) {
+    echo "Error creating Waitlist table: " . mysqli_error($con);
+} else {
+//    echo "Waitlist table created successfully!";
 }
 ?>

@@ -1,26 +1,39 @@
 <?php session_start();
 //course registration
 ?>
-<?php 
-$serverName = "localhost";
-$user = "root";
-$pass = "";
-$databaseName = "cst499_OnlineRegistration";
-
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-$con = mysqli_connect($serverName, $user, $pass, $databaseName);
-
-$result = $con->query("SELECT * FROM offered_courses");
-
-while ($row = $result->fetch_assoc()) {
-	echo "<div">;
-	echo "<h2>" .$row['courseTitle'] . "<h2>";
-	echo "<p>courseCredits: " .$row['courseCredits'] . "<p>";
-	echo "<form method='post' action='enroll_in_course.php'>">;
-	echo "<input type ='hidden' name='courseID' value='" . $row['courseID']."'>";
-	echo "<input type='submit' value='Enroll in course'>";
-	echo "</form>";
-	echo "</div>";
-}
+<?php include_once 'dbQueries.php';
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+	h1 {text-align: center;}
+	h4 {text-align: center;}
+	p {text-align: center;}
+	div {text-align: center;}
+	form {text-align: center;}
+	href {text-align: center;}
+	</style>
+
+	</head>
+	<body>
+			<a href="home.html">Home</a>
+			<a href="profile.php">Profile</a>
+			<a href="logout.html">Logout</a>
+	<h1>Course Registration</h1>
+	<p>Please select the courses you would like to register for</p>
+	<div>
+        <?php 
+        $sql = $con->prepare("SELECT * FROM offered_courses");
+        $sql->execute();
+        $result = $sql->get_result();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo $row['courseTitle'] . "<br/>";
+            }
+        } 
+        ?>
+    </div>
+</body>
+</html>

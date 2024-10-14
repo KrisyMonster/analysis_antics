@@ -1,15 +1,7 @@
-<?php require_once 'dbQuaries.php'?>
 <?php session_start();?>
-<?php
-//$con = new dbQuaries();
-//$con-$dbConnect();
-	$serverName = "localhost";
-	$userName = "username";
-	$password = "";
-	$databaseName = "CST499_OnlineRegistration";
-	
-$con = mysqli_connect($serverName, $user, $pass, $databaseName);
+<?php include_once 'dbQueries.php'; ?>
 
+<?php
 if(ISSET($_POST["submitBtn"])) {
 	
 	$u_fName = $_POST["firstName"];
