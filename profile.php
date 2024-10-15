@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once 'dbQueries.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,28 +25,39 @@ form {text-align: center;}
 		<b>Scheduled Courses:
 <div>
     <?php
-	if(ISSET($_POST["submitBtn"])) {
-    $studentID = $_SESSION['studentID']; 
-    $sql = ("SELECT * FROM enrolled_courses WHERE studentID = ?;");
-	$stmt = $con->prepare($sql);
-	$stmt->bind_param("s", $studentID);
-	$stmt->execute();
-	$result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo $row['courseTitle'] . "<br/>";
-        }
-    }
-	}
+	$stmt1 = $con->prepare("SELECT courseID FROM enrolled_courses WHERE studentID = ?");
+		$stmt1->bind_param("i",$_SESSION["studentID"]);
+        $stmt1->execute();
+        $result1 = $stmt1->get_result();
+		
+		if ($result1->num_rows > 0) {
+			while ($row1 = $result1->fetch_assoc()) {
+			$courseID=$row1['courseID'];	
 	
-    ?> </b>
+		$stmt2=$con->prepare("SELECT courseTitle FROM offered_courses WHERE courseID = ?");
+		$stmt2->bind_param("i",$_SESSION["courseID"]);
+		$stmt2->execute();
+		$result2=$stmt2->get_result();
+		
+		if ($result2->num_rows > 0) {
+			while ($row2 = $result2->fetch_assoc()) {
+		echo $row2["courseTitle"] . '<br>';
+			}
+		}
+			}
+		} else {
+			echo "No courses enrolled. Click Register Courses to get started";
+		}
+	
+    ?> 
+	</b>
  </div>
-    <form method="POST" action="courseRegistration.html">
+    <form method="POST" action="courseRegistration.php">
         <input name="submitBtn" type="submit" id="registerCourseBtn" value="Register Courses">
     </form>
- <form method="POST" action="manageCourse.php">
+	 <form method="POST" action="unenroll.php">
         <input name="submitBtn" type="submit" id="manageCourseBtn" value="Manage Enrollments">
-    </form>			
+    </form>
 </body>
 </html>
 

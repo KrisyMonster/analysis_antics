@@ -4,7 +4,11 @@ include_once 'dbQueries.php';
 include_once 'courseRegistration.php';
 ?>
 <?php
-if(ISSET($_POST["submit"])) {
+if(isset($_POST["submit"])) {
+	
+if(ISSET($_POST["checkboxes"])) {
+	foreach ($_POST["checkboxes"] as $courseID) {
+		
 	$studentID = $_SESSION["studentID"];
 	$courseID = $_SESSION["courseID"];
 	
@@ -15,6 +19,7 @@ if(ISSET($_POST["submit"])) {
 		$stmt1->execute();
 		$result1=$stmt1->get_result();
 	
+		
 		$stmt2=("SELECT courseID FROM offered_courses WHERE courseID = ?");
 		$stmt2=$con->prepare($stmt2);
 		$stmt2->bind_param("i",$_SESSION["courseID"]);
@@ -39,6 +44,20 @@ if(ISSET($_POST["submit"])) {
 				} 
 		}
 	}
+	}
+}
 }
 
+
+if (isset($_POST["removeBtn"])) {
+    if (isset($_POST["checkboxes"])) {
+        foreach ($_POST["checkboxes"] as $courseID) {
+           
+            $stmt = $con->prepare("DELETE FROM enrolled_courses WHERE studentID = ? AND courseID = ?");
+            $stmt->bind_param("ii", $_SESSION["studentID"], $courseID);
+            $stmt->execute();
+ 
+        }
+    }
+}
 ?>
